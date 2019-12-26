@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e1fe9faa-6020-4869-9267-e340da009d03",
+		"_postman_id": "1468fe83-3425-4868-887c-4a5d44b4bb67",
 		"name": "Conduit API Tests",
 		"description": "Collection for testing the Conduit API\n\nhttps://github.com/gothinkster/realworld",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -56,7 +56,7 @@
 									"pm.environment.set(\"username\", randName().toLowerCase());",
 									"console.log(pm.environment.get(\"username\"))",
 									"",
-									"pm.environment.set(\"email\", randName().toLowerCase() + \"@gmail.com\");",
+									"pm.environment.set(\"email\", randName().toLowerCase() + \"@fakemail.com\");",
 									"console.log(pm.environment.get(\"email\"))",
 									"",
 									"pm.environment.set(\"password\", '@#$' + randName() + '1-*^');",
