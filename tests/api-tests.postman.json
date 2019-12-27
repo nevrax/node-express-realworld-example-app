@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1468fe83-3425-4868-887c-4a5d44b4bb67",
+		"_postman_id": "1135921b-c8d8-40a1-9332-fbbb2ee92033",
 		"name": "Conduit API Tests",
 		"description": "Collection for testing the Conduit API\n\nhttps://github.com/gothinkster/realworld",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -54,13 +54,26 @@
 									"}",
 									"",
 									"pm.environment.set(\"username\", randName().toLowerCase());",
-									"console.log(pm.environment.get(\"username\"))",
+									"//console.log(pm.environment.get(\"username\"))",
 									"",
 									"pm.environment.set(\"email\", randName().toLowerCase() + \"@fakemail.com\");",
-									"console.log(pm.environment.get(\"email\"))",
+									"//console.log(pm.environment.get(\"email\"))",
 									"",
 									"pm.environment.set(\"password\", '@#$' + randName() + '1-*^');",
-									"console.log(pm.environment.get(\"password\"))",
+									"//console.log(pm.environment.get(\"password\"))",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a9055862-838e-4c17-90d9-a11a16c23b8e",
+								"exec": [
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
 									""
 								],
 								"type": "text/javascript"
@@ -71,9 +84,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{apiUrl}}",
+							"raw": "{{apiUrl}}/articles",
 							"host": [
 								"{{apiUrl}}"
+							],
+							"path": [
+								"articles"
 							]
 						}
 					},
@@ -579,7 +595,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
+								"id": "adbf9c36-01f5-409a-9714-d270ef73e9bd",
 								"exec": [
 									"var is200Response = responseCode.code === 200;",
 									"",
@@ -614,7 +630,8 @@
 									"    }",
 									"}",
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -635,7 +652,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{apiUrl}}/articles?author=johnjacob",
+							"raw": "{{apiUrl}}/articles?author={{username}}",
 							"host": [
 								"{{apiUrl}}"
 							],
@@ -645,7 +662,7 @@
 							"query": [
 								{
 									"key": "author",
-									"value": "johnjacob"
+									"value": "{{username}}"
 								}
 							]
 						}
@@ -658,7 +675,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
+								"id": "3ad8f60c-b0cd-4939-8645-b199842f540c",
 								"exec": [
 									"var is200Response = responseCode.code === 200;",
 									"",
@@ -693,7 +710,8 @@
 									"    }",
 									"}",
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -714,7 +732,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{apiUrl}}/articles?author=johnjacob",
+							"raw": "{{apiUrl}}/articles?author={{username}}",
 							"host": [
 								"{{apiUrl}}"
 							],
@@ -724,7 +742,7 @@
 							"query": [
 								{
 									"key": "author",
-									"value": "johnjacob"
+									"value": "{{username}}"
 								}
 							]
 						}
@@ -1384,7 +1402,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
+								"id": "01698f5c-ce16-443a-8e21-9d985e5f5106",
 								"exec": [
 									"var is200Response = responseCode.code === 200;",
 									"",
@@ -1419,7 +1437,8 @@
 									"    }",
 									"}",
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -1436,7 +1455,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{apiUrl}}/articles?author=johnjacob",
+							"raw": "{{apiUrl}}/articles?author={{username}}",
 							"host": [
 								"{{apiUrl}}"
 							],
@@ -1446,7 +1465,7 @@
 							"query": [
 								{
 									"key": "author",
-									"value": "johnjacob"
+									"value": "{{username}}"
 								}
 							]
 						}
@@ -1834,7 +1853,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
+								"id": "a2450767-be66-4601-8987-b9ba4046b928",
 								"exec": [
 									"if (!(environment.isIntegrationTest)) {",
 									"var is200Response = responseCode.code === 200;",
@@ -1854,7 +1873,8 @@
 									"}",
 									"}",
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -1875,13 +1895,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{apiUrl}}/profiles/johnjacob",
+							"raw": "{{apiUrl}}/profiles/{{username}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"profiles",
-								"johnjacob"
+								"{{username}}"
 							]
 						}
 					},
@@ -1893,7 +1913,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
+								"id": "ce9bc405-5071-45b0-acdc-1f7c37872c30",
 								"exec": [
 									"if (!(environment.isIntegrationTest)) {",
 									"var is200Response = responseCode.code === 200;",
@@ -1914,7 +1934,8 @@
 									"}",
 									"}",
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -1939,13 +1960,13 @@
 							"raw": "{\"user\":{\"email\":\"john@jacob.com\"}}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/profiles/johnjacob/follow",
+							"raw": "{{apiUrl}}/profiles/{{username}}/follow",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"profiles",
-								"johnjacob",
+								"{{username}}",
 								"follow"
 							]
 						}
@@ -1958,7 +1979,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
+								"id": "bb41633a-2661-4fde-920e-5da7ce7c07a8",
 								"exec": [
 									"if (!(environment.isIntegrationTest)) {",
 									"var is200Response = responseCode.code === 200;",
@@ -1979,7 +2000,8 @@
 									"}",
 									"}",
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -2000,13 +2022,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{apiUrl}}/profiles/johnjacob/follow",
+							"raw": "{{apiUrl}}/profiles/{{username}}/follow",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"profiles",
-								"johnjacob",
+								"{{username}}",
 								"follow"
 							]
 						}
