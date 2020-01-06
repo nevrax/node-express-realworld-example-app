@@ -1,29 +1,40 @@
 image: node:lts-alpine
 
-before_script:
-  - node -v
-  - npm -v
+variables:
+  MONGODB_URI: 'mongodb://mongo-test/conduit'
+  NODE_ENV: 'integration'
+
+cache:
+  key: "build-cache"
+  paths:
+    - node_modules/
 
 stages:
  - build
- - test
  - run
+ - test
 
 services:
-  - mongo:3.4
+  - name: mongo:3.4
+    alias: mongo-test
 
 build:
   stage: build
+  before_script:
+    - node -v
+    - npm -v
+    - cat /etc/hosts
   script:
-    - npm install
-
-test:
-  stage: test
-  script:
-    - npm install -g newman
-    - npm run test
+    - npm install --silent
 
 run:
   stage: run
   script:
     - npm run start
+
+test:
+  stage: test
+  before_script:
+     - npm install -g newman
+  script:
+    - npm run test
