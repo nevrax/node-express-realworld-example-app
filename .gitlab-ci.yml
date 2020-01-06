@@ -1,0 +1,29 @@
+image: node:lts-alpine
+
+before_script:
+  - node -v
+  - npm -v
+
+stages:
+ - build
+ - test
+ - run
+
+services:
+  - mongo:3.4
+
+build:
+  stage: build
+  script:
+    - npm install
+
+test:
+  stage: test
+  script:
+    - npm install -g newman
+    - npm run test
+
+run:
+  stage: run
+  script:
+    - npm run start
