@@ -1,7 +1,7 @@
 image: node:lts-alpine
 
 variables:
-  MONGODB_URI: 'mongodb://mongo-test/conduit'
+  MONGODB_URI: 'mongodb://mongo-rwapp-integration/conduit'
   NODE_ENV: 'integration'
 
 cache:
@@ -14,27 +14,31 @@ stages:
  - run
  - test
 
-services:
-  - name: mongo:3.4
-    alias: mongo-test
+before_script:
+  - node -v
+  - npm -v
 
 build:
   stage: build
-  before_script:
-    - node -v
-    - npm -v
-    - cat /etc/hosts
   script:
     - npm install --silent
 
 run:
   stage: run
+  services:
+    - name: mongo:3.4
+      alias: mongo-rwapp-integration
   script:
-    - npm run start
+    - npm run start &
 
 test:
   stage: test
+  services:
+    - name: mongo:3.4
+      alias: mongo-rwapp-integration
   before_script:
-     - npm install -g newman
+    - npm install --silent
+    - npm install -g newman
+    - npm run start &
   script:
     - npm run test
