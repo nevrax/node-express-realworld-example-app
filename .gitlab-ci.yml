@@ -21,14 +21,14 @@ before_script:
 build:
   stage: build
   tags:
-    - shell
+    - docker
   script:
     - npm install --silent
 
 run:
   stage: run
   tags:
-    - shell
+    - docker
   services:
     - name: mongo:3.4
       alias: mongo-rwapp-integration
@@ -38,7 +38,7 @@ run:
 test:
   stage: test
   tags:
-    - shell
+    - docker
   services:
     - name: mongo:3.4
       alias: mongo-rwapp-integration
